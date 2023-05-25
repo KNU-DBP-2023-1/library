@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>홈 화면</title>
+</head>
+<body>
+<div class="content" style="text-align:center">
+    <h2 class="tit">KNU 도서관리시스템</h2>
+    <div class="login_wrap">
+        <form id="" name="" method="post" action="" class="form_login">
+            <fieldset>
+                <p><button type="button" style="width:150px;height:50px;font-weight:bold;font-size:1.5em"
+                           th:onclick="|location.href='@{/signup}'|">회원가입</button></p>
+                <p><button type="button" style="width:150px;height:50px;font-weight:bold;font-size:1.5em"
+                           th:onclick="|location.href='@{/login}'|">로그인</button></p>
+            </fieldset>
+        </form>
+    </div>
+</div>
+</body>
+</html>
