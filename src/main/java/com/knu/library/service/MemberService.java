@@ -21,9 +21,14 @@ public class MemberService {
 
     public Member login(String id, String pw) {
         Member member = memberMapper.findById(id);
+        if (member == null) {
+            System.out.println("[MemberService]로그인 에러 - 아이디 없음");
+            return null;
+        }
         if (member.getPw().equals(pw)) {
             return member;
         } else {
+            System.out.println("[MemberService]로그인 에러 - 비밀번호 불일치");
             return null;
         }
     }
