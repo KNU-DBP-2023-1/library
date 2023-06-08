@@ -28,14 +28,14 @@ public class BookController {
         HttpSession session = request.getSession(false);
         if (session == null) { //세션 쿠키가 존재하지 않으면
             System.out.println("[BookController] session is null");
-            return "home";
+            return "redirect:/";
         }
 
         Member loginMember = (Member)session.getAttribute("loginMember");
 
         if (loginMember == null) { //세션에 회원 데이터가 없으면
             System.out.println("[BookController] loginMember is null");
-            return "home";
+            return "redirect:/";
         }
 
         model.addAttribute("member", loginMember);
