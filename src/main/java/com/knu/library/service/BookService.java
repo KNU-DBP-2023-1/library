@@ -25,7 +25,7 @@ public class BookService {
             book.setTitle(bookEntity.getTitle());
             book.setPublisher(bookEntity.getPublisher());
             book.setAuthor(bookEntity.getAuthor());
-            book.setOnRent(book.getOnRent());
+            book.setOnRent(bookEntity.getOnRent() ? "대출불가" : "대출가능");
             list.add(book);
         }
         return list;

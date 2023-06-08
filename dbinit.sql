@@ -24,6 +24,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`MEMBER` (
   `pw` VARCHAR(20) NULL,
   `name` VARCHAR(20) NULL,
   PRIMARY KEY (`id`))
+DEFAULT CHARACTER SET UTF8
 ENGINE = InnoDB;
 
 
@@ -33,22 +34,37 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `mydb`.`BOOK` ;
 
 CREATE TABLE IF NOT EXISTS `mydb`.`BOOK` (
-  `id` INT NOT NULL,
+  `id` INT auto_increment NOT NULL,
   `title` VARCHAR(50) NOT NULL,
   `publisher` VARCHAR(50) NOT NULL,
   `author` VARCHAR(50) NOT NULL,
   `on_rent` TINYINT NOT NULL DEFAULT 0,
-  `userid` VARCHAR(20) NOT NULL,
+  `userid` VARCHAR(20),
   PRIMARY KEY (`id`),
   INDEX `fk_Book_MEMBER_idx` (`userid` ASC) VISIBLE,
   CONSTRAINT `fk_Book_MEMBER`
     FOREIGN KEY (`userid`)
     REFERENCES `mydb`.`MEMBER` (`id`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON UPDATE NO ACTION) 
+DEFAULT CHARACTER SET UTF8
 ENGINE = InnoDB;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+-- -----------------------------------------------------
+-- Insert Test Data
+-- -----------------------------------------------------
+insert into book values (1, '책제목1', '출판사1', '작가1', false, null);
+insert into book values (2, '책제목2', '출판사2', '작가2', false, null);
+insert into book values (3, '책제목3', '출판사3', '작가3', false, null);
+insert into book values (4, '책제목4', '출판사4', '작가4', false, null);
+insert into book values (5, '책제목5', '출판사5', '작가5', false, null);
+
+insert into member values ('test1', 'test!', 'testname1');
+insert into member values ('test2', 'test!', 'testname2');
+insert into member values ('test3', 'test!', 'testname3');
+
