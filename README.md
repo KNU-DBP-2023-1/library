@@ -17,7 +17,7 @@
 
 ## Git 브랜치 전략(규칙)
 - **`main`브랜치는 팀원들이 작업한 브랜치를 병합하고 배포하는 용도로만 사용합니다.**
-- **팀원들은 본인의 브랜치에서 기능을 개발합니다.** 예시) `git switch taeho`<br>
+- **팀원들은 본인의 브랜치에서 기능을 개발합니다.** 예시) `git switch <브랜치명>`
 - 기능을 개발하기 전 반드시 **자신의 브랜치**에서 `git pull origin main`을 실행합니다.
-- 기능 개발을 마쳤다면 `git add .` `git commit -m "<메시지>"` `git push` 합니다.
+- 기능 개발을 마쳤다면 `git add .` `git commit -m "<메시지>"` `git push origin <브랜치명>` 합니다.
 - GitHub에서 **Pull Request**를 올리고 본인이 작업한 내용은 본인이 **직접 Merge** 합니다.
