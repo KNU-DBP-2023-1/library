@@ -10,6 +10,12 @@
 - id: 3 / title: 책제목3 / author:	작가3 / publisher: 출판사3	/ onRent: false / userid: null
 - id: 4 / title: 책제목4 / author:	작가4 / publisher: 출판사4	/ onRent: false / userid: null
 - id: 5 / title: 책제목5 / author:	작가5 / publisher: 출판사5	/ onRent: false / userid: null
+- id: 6 / title: 책제목6 / author:	작가6 / publisher: 출판사6	/ onRent: true / userid: test1
+- id: 7 / title: 책제목7 / author:	작가7 / publisher: 출판사7	/ onRent: true / userid: test1
+- id: 8 / title: 책제목8 / author:	작가8 / publisher: 출판사8	/ onRent: true / userid: test2
+- id: 9 / title: 책제목9 / author:	작가9 / publisher: 출판사9	/ onRent: true / userid: test2
+- id: 10 / title: 책제목10 / author:	작가10 / publisher: 출판사10	/ onRent: true / userid: test3
+
 ## 테스트 계정 목록
 - id: test1 / pw: test! / name: testname1
 - id: test2 / pw: test! / name: testname2

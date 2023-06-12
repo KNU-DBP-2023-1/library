@@ -58,11 +58,16 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- -----------------------------------------------------
 -- Insert Test Data
 -- -----------------------------------------------------
-insert into book values (1, 'Ã¥Á¦¸ñ1', 'ÃâÆÇ»ç1', 'ÀÛ°¡1', false, null);
-insert into book values (2, 'Ã¥Á¦¸ñ2', 'ÃâÆÇ»ç2', 'ÀÛ°¡2', false, null);
-insert into book values (3, 'Ã¥Á¦¸ñ3', 'ÃâÆÇ»ç3', 'ÀÛ°¡3', false, null);
-insert into book values (4, 'Ã¥Á¦¸ñ4', 'ÃâÆÇ»ç4', 'ÀÛ°¡4', false, null);
-insert into book values (5, 'Ã¥Á¦¸ñ5', 'ÃâÆÇ»ç5', 'ÀÛ°¡5', false, null);
+insert into book values (1, 'ì±…ì œëª©1', 'ì¶œíŒì‚¬1', 'ì‘ê°€1', false, null);
+insert into book values (2, 'ì±…ì œëª©2', 'ì¶œíŒì‚¬2', 'ì‘ê°€2', false, null);
+insert into book values (3, 'ì±…ì œëª©3', 'ì¶œíŒì‚¬3', 'ì‘ê°€3', false, null);
+insert into book values (4, 'ì±…ì œëª©4', 'ì¶œíŒì‚¬4', 'ì‘ê°€4', false, null);
+insert into book values (5, 'ì±…ì œëª©5', 'ì¶œíŒì‚¬5', 'ì‘ê°€5', false, null);
+insert into book values (6, 'ì±…ì œëª©6', 'ì¶œíŒì‚¬6', 'ì‘ê°€6', true, 'test1');
+insert into book values (7, 'ì±…ì œëª©7', 'ì¶œíŒì‚¬7', 'ì‘ê°€7', true, 'test1');
+insert into book values (8, 'ì±…ì œëª©8', 'ì¶œíŒì‚¬8', 'ì‘ê°€8', true, 'test2');
+insert into book values (9, 'ì±…ì œëª©9', 'ì¶œíŒì‚¬9', 'ì‘ê°€9', true, 'test2');
+insert into book values (10, 'ì±…ì œëª©10', 'ì¶œíŒì‚¬10', 'ì‘ê°€10', true, 'test3');
 
 insert into member values ('test1', 'test!', 'testname1');
 insert into member values ('test2', 'test!', 'testname2');
