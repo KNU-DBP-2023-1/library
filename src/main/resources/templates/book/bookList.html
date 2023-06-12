@@ -9,8 +9,14 @@
     <h2 class="tit">KNU 도서관리시스템</h2>
     <fieldset>
         <div style="text-align: right; font-weight: bold; font-size: 1.2em" th:text="|회원 이름: ${member.name}|">회원 이름: </div>
-        <div style="text-align: right"><button type="button" style="width:70px;height:30px;font-weight:bold"
-                                               th:onclick="|location.href='@{/logout}'|">로그아웃</button></div>
+        <div style="text-align: right">
+            <form th:action="@{/logout}" method="post">
+            <button type="submit"
+                    style="width:70px;height:30px;font-weight:bold">
+                로그아웃
+            </button>
+            </form>
+        </div>
         <h1 class="tit">도서 전체 목록</h1>
         <table border="1" width="50%" height="60" boardcolor="black" align="center">
             <tr>
