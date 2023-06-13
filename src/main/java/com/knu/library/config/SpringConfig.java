@@ -19,10 +19,6 @@ public class SpringConfig {
         this.em = em;
     }
 
-    @Bean
-    public BookService bookService() {
-        return new BookService(bookRepository());
-    }
 
     @Bean
     public BookRepository bookRepository() {
