@@ -36,7 +36,10 @@
         <td th:text="${books.title}"></td>
         <td th:text="${books.author}"></td>
         <td th:text="${books.publisher}"></td>
-        <td th:text="${books.onRent}"></td> //반납 버튼으로 바꾸기
+        <td>
+          <button type="button" style="display:inline;width:90px;height:30px;font-weight:bold"
+                  th:onclick="|location.href='@{/return(id=${books.id})}'|">반납</button>
+        </td>
       </tr>
     </table>
   </fieldset>

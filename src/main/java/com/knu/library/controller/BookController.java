@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -47,6 +49,12 @@ public class BookController {
         List<UserBook> books = bookService.findUserBooks(loginMember.getId());
         model.addAttribute("books", books);
         return "myPage";
+    }
+
+    @GetMapping("/return")
+    public String returnBook(@RequestParam Integer id) {
+        bookService.returnBook(id);
+        return "redirect:/myPage";
     }
 
     private Member getLoginMember(HttpServletRequest request) {
