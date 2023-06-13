@@ -11,13 +11,11 @@
         select * from member where id=#{id}
     </select>
 
-
-
-    <select id="findUser" resultType="UserBook">
-        select
-        *
-        from
-        book
-        where userid like concat('%',#{userid}, '%')
+    <select id="findUserBooks" resultType="UserBook">
+        select * from book where on_rent=true and userid=#{userid}
     </select>
+
+    <update id="returnBook">
+        update book set on_rent=false where id=#{bookId}
+    </update>
 </mapper>

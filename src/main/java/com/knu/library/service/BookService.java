@@ -39,7 +39,7 @@ public class BookService {
     }
   
     public List<UserBook> findUserBooks(String userid) {
-        return memberMapper.findUser(userid);
+        return memberMapper.findUserBooks(userid);
     }
 
     public BookEntity getBookById(Long bookId) {
@@ -52,6 +52,10 @@ public class BookService {
         BookEntity bookEntity = bookRepository.findById(bookId).orElseThrow(
                 IllegalArgumentException::new
         );
+    }
+
+    public void returnBook(Integer bookId) {
+        memberMapper.returnBook(bookId);
     }
 
 //        bookEntity.setOnRent(updateRentInfo);
