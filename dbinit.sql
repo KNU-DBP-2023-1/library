@@ -58,6 +58,10 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- -----------------------------------------------------
 -- Insert Test Data
 -- -----------------------------------------------------
+insert into member values ('test1', 'test!', 'testname1');
+insert into member values ('test2', 'test!', 'testname2');
+insert into member values ('test3', 'test!', 'testname3');
+
 insert into book values (1, '책제목1', '출판사1', '작가1', false, null);
 insert into book values (2, '책제목2', '출판사2', '작가2', false, null);
 insert into book values (3, '책제목3', '출판사3', '작가3', false, null);
@@ -68,8 +72,4 @@ insert into book values (7, '책제목7', '출판사7', '작가7', true, 'test1'
 insert into book values (8, '책제목8', '출판사8', '작가8', true, 'test2');
 insert into book values (9, '책제목9', '출판사9', '작가9', true, 'test2');
 insert into book values (10, '책제목10', '출판사10', '작가10', true, 'test3');
-
-insert into member values ('test1', 'test!', 'testname1');
-insert into member values ('test2', 'test!', 'testname2');
-insert into member values ('test3', 'test!', 'testname3');
 

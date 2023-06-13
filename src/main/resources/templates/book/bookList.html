@@ -10,7 +10,9 @@
     <fieldset>
         <div style="text-align: right; font-weight: bold; font-size: 1.2em" th:text="|회원 이름: ${member.name}|">회원 이름: </div>
         <div style="text-align: right">
-            <form th:action="@{/logout}" method="post">
+            <button type="button" style="display:inline;width:90px;height:30px;font-weight:bold"
+                    th:onclick="|location.href='@{/myPage}'|">마이페이지</button>
+            <form style="display:inline" th:action="@{/logout}" method="post">
             <button type="submit"
                     style="width:70px;height:30px;font-weight:bold">
                 로그아웃
