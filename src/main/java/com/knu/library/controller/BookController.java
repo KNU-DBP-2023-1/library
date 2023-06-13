@@ -2,11 +2,14 @@ package com.knu.library.controller;
 
 import com.knu.library.domain.Book;
 import com.knu.library.domain.Member;
+import com.knu.library.entity.BookEntity;
 import com.knu.library.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -45,4 +48,19 @@ public class BookController {
         model.addAttribute("books", books);
         return "book/bookList";
     }
+
+    // 아직 미완성
+//    @GetMapping(value = "/bookList/{bookId}/rent")
+//    public String getBookRentForm(@PathVariable Long bookId, Model model) {
+//        BookEntity bookEntity = bookService.getBookById(bookId);
+//        model.addAttribute("book", bookEntity);
+//        return "book/bookRentForm";
+//    }
+//
+//    @PostMapping("/bookList/{bookId}/rent")
+//    public String getBookRent(@PathVariable Long bookId, Model model) {
+//        model.addAttribute("id", bookId);
+//        bookService.rentBook(bookId);
+//        return "redirect:/bookList";
+//    }
 }

@@ -30,4 +30,19 @@ public class BookService {
         }
         return list;
     }
+
+    public BookEntity getBookById(Long bookId) {
+        return bookRepository.findById(bookId).orElseThrow(
+                IllegalArgumentException::new
+        );
+    }
+
+    public void rentBook(Long bookId) {
+        BookEntity bookEntity = bookRepository.findById(bookId).orElseThrow(
+                IllegalArgumentException::new
+        );
+
+//        bookEntity.setOnRent(updateRentInfo);
+//        bookRepository.save(bookEntity);
+    }
 }
