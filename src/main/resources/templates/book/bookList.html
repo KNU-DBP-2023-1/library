@@ -31,8 +31,17 @@
                 <td th:text="${books.title}"></td>
                 <td th:text="${books.author}"></td>
                 <td th:text="${books.publisher}"></td>
-                <!-- TODO if (onRent==false) 이면 대출버튼 만들어야 함 -->
-                <td th:text="${books.onRent}"></td>
+                <td th:if="${books.onRent} == '대출가능'" >
+                    대출가능
+                    <form th:action="@{/bookList/{bookId}/rent(bookId = ${books.id})}" method="post">
+<!--                대출 버튼을 줄 바꾸지 않고 대출 여부 바로 옆에 나오게 하고 싶어서 다시 작업 예정-->
+                    <button type="submit"
+                            style="width:70px;height:30px;font-weight:bold">
+                        대출
+                    </button>
+                    </form>
+                </td>
+                <td th:if="${books.onRent} == '대출불가'">대출불가</td>
             </tr>
         </table>
     </fieldset>

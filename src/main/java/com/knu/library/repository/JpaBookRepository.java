@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class JpaBookRepository implements BookRepository {
@@ -23,5 +24,11 @@ public class JpaBookRepository implements BookRepository {
         List<BookEntity> result = em.createQuery("select b from book b", BookEntity.class)
                 .getResultList();
         return result;
+    }
+
+    @Override
+    public Optional<BookEntity> findById(Long id) {
+        BookEntity book = em.find(BookEntity.class, id);
+        return Optional.ofNullable(book);
     }
 }
