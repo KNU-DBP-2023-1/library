@@ -1,20 +1,27 @@
 package com.knu.library.service;
 
 import com.knu.library.domain.Book;
+import com.knu.library.domain.UserBook;
 import com.knu.library.entity.BookEntity;
 import com.knu.library.repository.BookRepository;
+import com.knu.library.repository.MemberMapper;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Transactional
+@Service
 public class BookService {
 
     private final BookRepository bookRepository;
+    private final MemberMapper memberMapper;
 
-    public BookService(BookRepository bookRepository) {
+
+    public BookService(BookRepository bookRepository, MemberMapper memberMapper) {
         this.bookRepository = bookRepository;
+        this.memberMapper = memberMapper;
     }
 
     public List<Book.Simple> findBooks() {
@@ -29,5 +36,10 @@ public class BookService {
             list.add(book);
         }
         return list;
+    }
+
+
+    public List<UserBook> findUserBooks(String userid) {
+        return memberMapper.findUser(userid);
     }
 }
