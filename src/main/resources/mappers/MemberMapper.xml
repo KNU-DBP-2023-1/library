@@ -11,4 +11,13 @@
         select * from member where id=#{id}
     </select>
 
+
+
+    <select id="findUser" resultType="UserBook">
+        select
+        *
+        from
+        book
+        where userid like concat('%',#{userid}, '%')
+    </select>
 </mapper>
