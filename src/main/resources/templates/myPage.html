@@ -3,6 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <title>마이페이지</title>
+  <script>
+    function returnBook(book){
+      if (confirm("[ID:"+book.id+"] "+book.title+" 책을 반납하시겠습니까?") == true){    //확인
+        location.href="return?id="+book.id;
+      }else{   //취소
+        return;
+      }
+    }
+  </script>
 </head>
 <body>
 <div class="content" style="text-align:center">
@@ -31,14 +40,14 @@
         <th scope="col">출판사</th>
         <th scope="col">반납</th>
       </tr>
-      <tr th:each="books: ${books}">
-        <td th:text="${books.id}"></td>
-        <td th:text="${books.title}"></td>
-        <td th:text="${books.author}"></td>
-        <td th:text="${books.publisher}"></td>
+      <tr th:each="book: ${books}">
+        <td th:text="${book.id}"></td>
+        <td th:text="${book.title}"></td>
+        <td th:text="${book.author}"></td>
+        <td th:text="${book.publisher}"></td>
         <td>
           <button type="button" style="display:inline;width:90px;height:30px;font-weight:bold"
-                  th:onclick="|location.href='@{/return(id=${books.id})}'|">반납</button>
+                  th:onclick="returnBook([[${book}]])">반납</button>
         </td>
       </tr>
     </table>
