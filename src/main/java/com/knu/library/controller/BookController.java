@@ -3,11 +3,13 @@ package com.knu.library.controller;
 import com.knu.library.domain.Book;
 import com.knu.library.domain.Member;
 import com.knu.library.domain.UserBook;
+import com.knu.library.entity.BookEntity;
 import com.knu.library.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -73,18 +75,23 @@ public class BookController {
         return loginMember;
     }
 
-    // 아직 미완성
-//    @GetMapping(value = "/bookList/{bookId}/rent")
-//    public String getBookRentForm(@PathVariable Long bookId, Model model) {
-//        BookEntity bookEntity = bookService.getBookById(bookId);
-//        model.addAttribute("book", bookEntity);
-//        return "book/bookRentForm";
-//    }
-//
-//    @PostMapping("/bookList/{bookId}/rent")
-//    public String getBookRent(@PathVariable Long bookId, Model model) {
-//        model.addAttribute("id", bookId);
+//    @GetMapping("/rent")
+//    public String rentBook(@RequestParam Long bookId) {
 //        bookService.rentBook(bookId);
+////        model.addAttribute("book", bookEntity);
 //        return "redirect:/bookList";
 //    }
+
+    @GetMapping("/bookList/{bookId}/update")
+    public String getUpdateBookForm(@PathVariable Long bookId, Model model) {
+        BookEntity bookEntity = bookService.getBookById(bookId);
+        model.addAttribute("book", bookEntity);
+        return "/book/bookUpdateForm" + bookId;
+    }
+
+    @PostMapping("/bookList/{bookId}")
+    public String updateBook(@PathVariable Long bookId, Book.Update updateForm) {
+        bookService.updateBook(bookId, updateForm);
+        return "redirect:/bookList" + bookId;
+    }
 }

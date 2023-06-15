@@ -48,16 +48,26 @@ public class BookService {
         );
     }
 
+    /* 다시 작업 예정
     public void rentBook(Long bookId) {
+        Book.Update book = new Book.Update();
+        book.setOnRent(true);
+        bookRepository.rent(bookId);
+    }
+     */
+
+    public void updateBook(Long bookId, Book.Update updateForm) {
         BookEntity bookEntity = bookRepository.findById(bookId).orElseThrow(
                 IllegalArgumentException::new
         );
+
+        bookEntity.setTitle(updateForm.getTitle());
+        bookEntity.setAuthor(updateForm.getAuthor());
+        bookEntity.setPublisher(updateForm.getPublisher());
+        bookRepository.save(bookEntity);
     }
 
     public void returnBook(Integer bookId) {
         memberMapper.returnBook(bookId);
     }
-
-//        bookEntity.setOnRent(updateRentInfo);
-//        bookRepository.save(bookEntity);
 }
