@@ -22,5 +22,5 @@ public class BookEntity {
     private String author;
 
     @Column
-    private Boolean onRent;
+    private Boolean onRent = true;
 }
