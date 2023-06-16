@@ -6,8 +6,16 @@
     <script>
         function rentBook(books){
             if (confirm("[ID:"+books.id+"] "+books.title+" 책을 대출하시겠습니까?") == true){    //확인
-                // location.href="rent?bookId="+books.id;
-                location.href="/bookList";
+                location.href="rent?bookId="+books.id;
+            }else{   //취소
+                return;
+            }
+        }
+    </script>
+    <script>
+        function deleteBook(books){
+            if (confirm("[ID:"+books.id+"] "+books.title+" 책을 삭제하시겠습니까?") == true){    //확인
+                location.href="delete?bookId="+books.id;
             }else{   //취소
                 return;
             }
@@ -55,20 +63,15 @@
                 <td style="width:150px" th:if="${member.id} == 'test1'"> <!-- 추후 관리자 id로 수정 예정 -->
                     <button type="submit"
                             style="width:70px;height:30px;font-weight:bold"
-                            th:onclick="|location.href='@{/bookList/{bookId}/update}'|">
-                        수정
-                    </button>
-                    <button type="submit"
-                            style="width:70px;height:30px;font-weight:bold">
-                        삭제
-                    </button>
+                            th:onclick="|location.href='@{/book/bookUpdateForm}'|">수정</button>
+                    <button type="button" style="display:inline;width:70px;height:30px;font-weight:bold"
+                            th:onclick="deleteBook([[${books}]])">삭제</button>
                 </td>
             </tr>
         </table>
-        <button th:if="${member.id} == 'test1'" type="submit"
-                style="width:100px;height:45px;font-weight:bold;font-size:large;float:right">
-            도서 추가
-        </button>
+        <button th:if="${member.id} == 'test1'" type="button"
+                style="width:100px;height:45px;font-weight:bold;font-size:large;float:right"
+                th:onclick="|location.href='@{/bookList/add}'|">도서 추가</button>
     </fieldset>
 </div>
 </body>

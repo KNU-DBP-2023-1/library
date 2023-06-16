@@ -75,23 +75,41 @@ public class BookController {
         return loginMember;
     }
 
-//    @GetMapping("/rent")
-//    public String rentBook(@RequestParam Long bookId) {
-//        bookService.rentBook(bookId);
-////        model.addAttribute("book", bookEntity);
-//        return "redirect:/bookList";
-//    }
+    @GetMapping("/rent")
+    public String rentBook(@RequestParam Long bookId) {
+        // 수정할 예정
+        bookService.rentBook(bookId);
+        return "redirect:/bookList";
+    }
 
-    @GetMapping("/bookList/{bookId}/update")
-    public String getUpdateBookForm(@PathVariable Long bookId, Model model) {
+    @GetMapping("/update")
+    public String getUpdateBookForm(@RequestParam Long bookId, Model model) {
         BookEntity bookEntity = bookService.getBookById(bookId);
         model.addAttribute("book", bookEntity);
-        return "/book/bookUpdateForm" + bookId;
+        return "book/bookUpdateForm";
     }
 
     @PostMapping("/bookList/{bookId}")
     public String updateBook(@PathVariable Long bookId, Book.Update updateForm) {
         bookService.updateBook(bookId, updateForm);
         return "redirect:/bookList" + bookId;
+    }
+
+    @GetMapping("/delete")
+    public String deleteBook(@RequestParam Long bookId) {
+        bookService.deleteBook(bookId);
+        System.out.println("deleted successfully");
+        return "redirect:/bookList";
+    }
+
+    @GetMapping("/bookList/add")
+    public String getAddBookForm() {
+        return "book/bookAddForm";
+    }
+
+    @PostMapping("/bookList/add")
+    public String addBook(Book.Create form) {
+        bookService.addBook(form);
+        return "redirect:/bookList";
     }
 }
