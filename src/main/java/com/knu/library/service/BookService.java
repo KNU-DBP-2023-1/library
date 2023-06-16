@@ -1,10 +1,12 @@
 package com.knu.library.service;
 
 import com.knu.library.domain.Book;
+import com.knu.library.domain.Member;
 import com.knu.library.domain.UserBook;
 import com.knu.library.entity.BookEntity;
 import com.knu.library.repository.BookRepository;
 import com.knu.library.repository.MemberMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,7 +19,6 @@ public class BookService {
 
     private final BookRepository bookRepository;
     private final MemberMapper memberMapper;
-
 
     public BookService(BookRepository bookRepository, MemberMapper memberMapper) {
         this.bookRepository = bookRepository;
@@ -48,19 +49,18 @@ public class BookService {
         );
     }
 
-    /* 다시 작업 예정
     public void rentBook(Long bookId) {
-        Book.Update book = new Book.Update();
-        book.setOnRent(true);
-        bookRepository.rent(bookId);
+        BookEntity bookEntity = bookRepository.findById(bookId).orElseThrow(
+                IllegalArgumentException::new
+        );
+        bookEntity.setOnRent(true);
+        bookRepository.save(bookEntity);
     }
-     */
 
     public void updateBook(Long bookId, Book.Update updateForm) {
         BookEntity bookEntity = bookRepository.findById(bookId).orElseThrow(
                 IllegalArgumentException::new
         );
-
         bookEntity.setTitle(updateForm.getTitle());
         bookEntity.setAuthor(updateForm.getAuthor());
         bookEntity.setPublisher(updateForm.getPublisher());
@@ -69,5 +69,20 @@ public class BookService {
 
     public void returnBook(Integer bookId) {
         memberMapper.returnBook(bookId);
+    }
+
+    public void deleteBook(Long bookId) {
+        BookEntity bookEntity = bookRepository.findById(bookId).orElseThrow(
+                IllegalArgumentException::new
+        );
+        bookRepository.delete(bookEntity);
+    }
+
+    public void addBook(Book.Create bookForm) {
+        BookEntity bookEntity = new BookEntity();
+        bookEntity.setTitle(bookForm.getTitle());
+        bookEntity.setAuthor(bookForm.getAuthor());
+        bookEntity.setPublisher(bookForm.getPublisher());
+        bookRepository.save(bookEntity);
     }
 }
