@@ -15,4 +15,8 @@ public interface MemberMapper {
     List<UserBook> findUserBooks(String userid);
 
     void returnBook(Integer bookId);
+
+    List<UserBook> findCondName(UserBook userBook);
+
+    List<UserBook> findCondId(UserBook userBook);
 }

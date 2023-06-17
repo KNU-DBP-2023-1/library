@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>도서 이름 검색</title>
+  <script>
+        function rentBook(books){
+            if (confirm("[ID:"+books.id+"] "+books.title+" 책을 대출하시겠습니까?") == true){    //확인
+                // location.href="rent?bookId="+books.id;
+                location.href="/bookList";
+            }else{   //취소
+                return;
+            }
+        }
+        function div_OnOff(v){
+          if(v == "1"){
+              document.getElementById("nameBox").style.display = "";
+              document.getElementById("booksIdBox").style.display = "none";
+          }
+          else if(v == "2"){
+              document.getElementById("nameBox").style.display = "none";
+              document.getElementById("booksIdBox").style.display = "";
+          }
+        }
+    </script>
+</head>
+<body>
+<div class="content" style="text-align:center">
+  <h2 class="tit">KNU 도서관리시스템</h2>
+  <fieldset>
+    <div style="text-align: right; font-weight: bold; font-size: 1.2em" th:text="|회원 이름: ${member.name}|">회원 이름: </div>
+    <div style="text-align: right">
+      <button type="button" style="display:inline;width:90px;height:30px;font-weight:bold"
+              th:onclick="|location.href='@{/myPage}'|">마이페이지</button>
+      <form style="display:inline" th:action="@{/logout}" method="post">
+        <button type="submit"
+                style="width:70px;height:30px;font-weight:bold">
+          로그아웃
+        </button>
+      </form>
+    </div>
+    <h1 class="tit">도서 검색</h1>
+
+
+      <input type="radio" name="category" value="1" onclick="div_OnOff(this.value);">도서명으로 검색
+      <input type="radio" name="category" value ="2" onclick="div_OnOff(this.value);">도서 id로 검색
+
+
+    <div class="container" id="nameBox" style="display:none;">
+      <form action="/bookSearchName" method ="post">
+        <div class="form-group">
+          <p><label for="title">제목 </label>
+            <input type="text" id="title" name="title" placeholder="제목을 입력하세요">
+          </p>
+        </div>
+        <button type="submit">검색</button>
+      </form>
+    </div>
+
+    <div class="container" id="booksIdBox"style="display:none;">
+      <form action="/bookSearchId" method ="post">
+        <div class="form-group">
+          <p><label for="title">ID </label>
+            <input type="text" id="id" name="id" placeholder="도서 ID를 입력하세요">
+          </p>
+        </div>
+        <button type="submit">검색</button>
+      </form>
+    </div>
+
+
+
+    <table border="1" width="50%" height="60" boardcolor="black" align="center">
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">제목</th>
+        <th scope="col">저자</th>
+        <th scope="col">출판사</th>
+        <th scope="col">대출여부</th>
+        <th th:if="${member.id} == 'test1'" scope="col">관리자 기능</th>
+      </tr>
+      <tr th:each="books: ${books}">
+        <td th:text="${books.id}"></td>
+        <td th:text="${books.title}"></td>
+        <td th:text="${books.author}"></td>
+        <td th:text="${books.publisher}"></td>
+        <td style="width:140px;text-align:left" th:if="${books.onRent} == 0" >
+          <form th:action="@{/bookList/{bookId}/rent(bookId = ${books.id})}" method="post">
+            대출가능
+            <button type="button" style="display:inline;width:70px;height:30px;font-weight:bold;float:right"
+                    th:onclick="rentBook([[${books}]])">대출</button>
+          </form>
+        </td>
+        <td style="text-align:left" th:if="${books.onRent} == 1">대출불가</td>
+        <td style="width:150px" th:if="${member.id} == 'test1'"> <!-- 추후 관리자 id로 수정 예정 -->
+          <button type="submit"
+                  style="width:70px;height:30px;font-weight:bold"
+                  th:onclick="|location.href='@{/bookList/{bookId}/update}'|">
+            수정
+          </button>
+          <button type="submit"
+                  style="width:70px;height:30px;font-weight:bold">
+            삭제
+          </button>
+        </td>
+      </tr>
+    </table>
+
+  </fieldset>
+</div>
+</body>
+</html>
