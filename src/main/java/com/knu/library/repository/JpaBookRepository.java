@@ -32,14 +32,6 @@ public class JpaBookRepository implements BookRepository {
         return Optional.ofNullable(book);
     }
 
-    /* 다시 작업 예정
-    @Override
-    public void rent(BookEntity book) {
-        em.createQuery("update book set onRent=true");
-
-    }
-    */
-
     @Override
     public void delete(BookEntity book) {
         em.remove(book);

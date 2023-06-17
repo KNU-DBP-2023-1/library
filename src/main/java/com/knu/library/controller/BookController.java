@@ -72,24 +72,51 @@ public class BookController {
         return loginMember;
     }
 
-//    @GetMapping("/rent")
-//    public String rentBook(@RequestParam Long bookId) {
-//        bookService.rentBook(bookId);
-////        model.addAttribute("book", bookEntity);
-//        return "redirect:/bookList";
-//    }
+    @GetMapping("/rent")
+    public String rentBook(@RequestParam Long bookId, HttpServletRequest request) {
+        // 수정할 예정
+        Member loginMember = getLoginMember(request);
+        if (loginMember == null) return "redirect:/";
+
+        bookService.rentBook(bookId, loginMember);
+        return "redirect:/bookList";
+    }
 
     @GetMapping("/bookList/{bookId}/update")
-    public String getUpdateBookForm(@PathVariable Long bookId, Model model) {
+    public String getUpdateBookForm(@PathVariable Long bookId, Model model, HttpServletRequest request) {
         BookEntity bookEntity = bookService.getBookById(bookId);
+        Member loginMember = getLoginMember(request);
+        if (loginMember == null) return "redirect:/";
         model.addAttribute("book", bookEntity);
-        return "/book/bookUpdateForm" + bookId;
+        model.addAttribute("member", loginMember);
+        return "book/bookUpdateForm";
     }
 
     @PostMapping("/bookList/{bookId}")
     public String updateBook(@PathVariable Long bookId, Book.Update updateForm) {
         bookService.updateBook(bookId, updateForm);
-        return "redirect:/bookList" + bookId;
+        return "redirect:/bookList";
+    }
+
+    @GetMapping("/delete")
+    public String deleteBook(@RequestParam Long bookId) {
+        bookService.deleteBook(bookId);
+        System.out.println("deleted successfully");
+        return "redirect:/bookList";
+    }
+
+    @GetMapping("/bookList/add")
+    public String getAddBookForm(Model model, HttpServletRequest request) {
+        Member loginMember = getLoginMember(request);
+        if (loginMember == null) return "redirect:/";
+        model.addAttribute("member", loginMember);
+        return "book/bookAddForm";
+    }
+
+    @PostMapping("/bookList/add")
+    public String addBook(Book.Create form) {
+        bookService.addBook(form);
+        return "redirect:/bookList";
     }
 
     @GetMapping(value = "/bookSearchName")

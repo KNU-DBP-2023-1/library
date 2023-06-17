@@ -8,7 +8,7 @@ public class Book {
         private String title;
         private String author;
         private String publisher;
-        private String onRent;
+        private Boolean onRent = false;
     }
 
     @Data
@@ -16,7 +16,6 @@ public class Book {
         private String title;
         private String author;
         private String publisher;
-        private String onRent;
     }
 
     @Data

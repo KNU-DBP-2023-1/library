@@ -22,5 +22,9 @@ public class BookEntity {
     private String author;
 
     @Column
-    private Boolean onRent = true;
+    private Boolean onRent;
+
+    @ManyToOne
+    @JoinColumn(name = "userid")
+    private MemberEntity memberEntity;
 }
