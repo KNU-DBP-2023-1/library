@@ -4,9 +4,9 @@ import com.knu.library.domain.Book;
 import com.knu.library.domain.Member;
 import com.knu.library.domain.UserBook;
 import com.knu.library.entity.BookEntity;
+import com.knu.library.entity.MemberEntity;
 import com.knu.library.repository.BookRepository;
 import com.knu.library.repository.MemberMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -49,11 +49,14 @@ public class BookService {
         );
     }
 
-    public void rentBook(Long bookId) {
+    public void rentBook(Long bookId, Member loginMember) {
         BookEntity bookEntity = bookRepository.findById(bookId).orElseThrow(
                 IllegalArgumentException::new
         );
+        MemberEntity memberEntity = new MemberEntity();
+        memberEntity.setId(loginMember.getId());
         bookEntity.setOnRent(true);
+        bookEntity.setMemberEntity(memberEntity);
         bookRepository.save(bookEntity);
     }
 
@@ -83,6 +86,7 @@ public class BookService {
         bookEntity.setTitle(bookForm.getTitle());
         bookEntity.setAuthor(bookForm.getAuthor());
         bookEntity.setPublisher(bookForm.getPublisher());
+        bookEntity.setOnRent(bookForm.getOnRent());
         bookRepository.save(bookEntity);
     }
 }

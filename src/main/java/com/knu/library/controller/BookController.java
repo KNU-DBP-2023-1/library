@@ -76,23 +76,29 @@ public class BookController {
     }
 
     @GetMapping("/rent")
-    public String rentBook(@RequestParam Long bookId) {
+    public String rentBook(@RequestParam Long bookId, HttpServletRequest request) {
         // 수정할 예정
-        bookService.rentBook(bookId);
+        Member loginMember = getLoginMember(request);
+        if (loginMember == null) return "redirect:/";
+
+        bookService.rentBook(bookId, loginMember);
         return "redirect:/bookList";
     }
 
-    @GetMapping("/update")
-    public String getUpdateBookForm(@RequestParam Long bookId, Model model) {
+    @GetMapping("/bookList/{bookId}/update")
+    public String getUpdateBookForm(@PathVariable Long bookId, Model model, HttpServletRequest request) {
         BookEntity bookEntity = bookService.getBookById(bookId);
+        Member loginMember = getLoginMember(request);
+        if (loginMember == null) return "redirect:/";
         model.addAttribute("book", bookEntity);
+        model.addAttribute("member", loginMember);
         return "book/bookUpdateForm";
     }
 
     @PostMapping("/bookList/{bookId}")
     public String updateBook(@PathVariable Long bookId, Book.Update updateForm) {
         bookService.updateBook(bookId, updateForm);
-        return "redirect:/bookList" + bookId;
+        return "redirect:/bookList";
     }
 
     @GetMapping("/delete")
@@ -103,7 +109,10 @@ public class BookController {
     }
 
     @GetMapping("/bookList/add")
-    public String getAddBookForm() {
+    public String getAddBookForm(Model model, HttpServletRequest request) {
+        Member loginMember = getLoginMember(request);
+        if (loginMember == null) return "redirect:/";
+        model.addAttribute("member", loginMember);
         return "book/bookAddForm";
     }
 

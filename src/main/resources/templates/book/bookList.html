@@ -61,9 +61,9 @@
                 </td>
                 <td style="text-align:left" th:if="${books.onRent} == '대출불가'">대출불가</td>
                 <td style="width:150px" th:if="${member.id} == 'test1'"> <!-- 추후 관리자 id로 수정 예정 -->
-                    <button type="submit"
+                    <button type="button"
                             style="width:70px;height:30px;font-weight:bold"
-                            th:onclick="|location.href='@{/book/bookUpdateForm}'|">수정</button>
+                            th:onclick="|location.href='@{/bookList/{bookId}/update(bookId = ${books.id})}'|">수정</button>
                     <button type="button" style="display:inline;width:70px;height:30px;font-weight:bold"
                             th:onclick="deleteBook([[${books}]])">삭제</button>
                 </td>
