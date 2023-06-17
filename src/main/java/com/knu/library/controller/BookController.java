@@ -8,10 +8,7 @@ import com.knu.library.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -93,5 +90,44 @@ public class BookController {
     public String updateBook(@PathVariable Long bookId, Book.Update updateForm) {
         bookService.updateBook(bookId, updateForm);
         return "redirect:/bookList" + bookId;
+    }
+
+    @GetMapping(value = "/bookSearchName")
+    public String searchForm(Model model, HttpServletRequest request) {
+        Member loginMember = getLoginMember(request);
+        if (loginMember == null) return "redirect:/";
+        model.addAttribute("member", loginMember);
+        // === 로그인 처리 로직 끝 ===
+
+        return "book/bookSearchName";
+    }
+
+    @PostMapping(value = "/bookSearchName")
+    public String searchName(Book.Create form, Model model, Model model2,  HttpServletRequest request){
+        Member loginMember = getLoginMember(request);
+        if (loginMember == null) return "redirect:/";
+        model2.addAttribute("member", loginMember);
+
+        List<UserBook> books = bookService.findCondBooks(form);
+        model.addAttribute("books", books);
+        return "book/bookSearchName";
+    }
+//    @GetMapping(value = "/bookSearchId")
+//    public String searchFormId(Model model, HttpServletRequest request) {
+//        Member loginMember = getLoginMember(request);
+//        if (loginMember == null) return "redirect:/";
+//        model.addAttribute("member", loginMember);
+//
+//        return "book/bookSearchName";
+//    }
+    @PostMapping(value = "/bookSearchId")
+    public String searchId(Book.Simple form, Model model, Model model2,  HttpServletRequest request){
+        Member loginMember = getLoginMember(request);
+        if (loginMember == null) return "redirect:/";
+        model2.addAttribute("member", loginMember);
+
+        List<UserBook> books = bookService.findCondBooksId(form);
+        model.addAttribute("books", books);
+        return "book/bookSearchName";
     }
 }

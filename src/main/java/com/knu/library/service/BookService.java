@@ -37,7 +37,6 @@ public class BookService {
         }
         return list;
     }
-  
     public List<UserBook> findUserBooks(String userid) {
         return memberMapper.findUserBooks(userid);
     }
@@ -69,5 +68,41 @@ public class BookService {
 
     public void returnBook(Integer bookId) {
         memberMapper.returnBook(bookId);
+    }
+
+    public List<UserBook> findCondBooks(Book.Create bookForm) {
+        UserBook bookEntity = new UserBook();
+        bookEntity.setTitle(bookForm.getTitle());
+
+
+        List<UserBook> list = new ArrayList<>();
+        for(UserBook bookEntity2 : memberMapper.findCondName(bookEntity)) {
+            UserBook book2 = new UserBook();
+            book2.setId(bookEntity2.getId());
+            book2.setTitle(bookEntity2.getTitle());
+            book2.setPublisher(bookEntity2.getPublisher());
+            book2.setAuthor(bookEntity2.getAuthor());
+            book2.setOnRent(bookEntity2.getOnRent());
+            list.add(book2);
+        }
+        return list;
+    }
+
+
+    public List<UserBook> findCondBooksId(Book.Simple bookForm) {
+        UserBook bookEntity = new UserBook();
+        bookEntity.setId(bookForm.getId());
+
+        List<UserBook> list = new ArrayList<>();
+        for(UserBook bookEntity2 : memberMapper.findCondId(bookEntity)) {
+            UserBook book2 = new UserBook();
+            book2.setId(bookEntity2.getId());
+            book2.setTitle(bookEntity2.getTitle());
+            book2.setPublisher(bookEntity2.getPublisher());
+            book2.setAuthor(bookEntity2.getAuthor());
+            book2.setOnRent(bookEntity2.getOnRent());
+            list.add(book2);
+        }
+        return list;
     }
 }

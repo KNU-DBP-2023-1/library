@@ -18,4 +18,11 @@
     <update id="returnBook">
         update book set on_rent=false where id=#{bookId}
     </update>
+
+    <select id="findCondName" resultType="UserBook">
+        select * from book where title like concat('%',#{title}, '%')
+    </select>
+    <select id="findCondId" resultType="UserBook">
+        select * from book where id=#{id}
+    </select>
 </mapper>
