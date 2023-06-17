@@ -4,14 +4,6 @@
   <meta charset="UTF-8">
   <title>도서 이름 검색</title>
   <script>
-        function rentBook(books){
-            if (confirm("[ID:"+books.id+"] "+books.title+" 책을 대출하시겠습니까?") == true){    //확인
-                // location.href="rent?bookId="+books.id;
-                location.href="/bookList";
-            }else{   //취소
-                return;
-            }
-        }
         function div_OnOff(v){
           if(v == "1"){
               document.getElementById("nameBox").style.display = "";
@@ -21,6 +13,24 @@
               document.getElementById("nameBox").style.display = "none";
               document.getElementById("booksIdBox").style.display = "";
           }
+        }
+    </script>
+  <script>
+        function rentBook(books){
+            if (confirm("[ID:"+books.id+"] "+books.title+" 책을 대출하시겠습니까?") == true){    //확인
+                location.href="rent?bookId="+books.id;
+            }else{   //취소
+                return;
+            }
+        }
+    </script>
+  <script>
+        function deleteBook(books){
+            if (confirm("[ID:"+books.id+"] "+books.title+" 책을 삭제하시겠습니까?") == true){    //확인
+                location.href="delete?bookId="+books.id;
+            }else{   //취소
+                return;
+            }
         }
     </script>
 </head>
@@ -93,15 +103,11 @@
         </td>
         <td style="text-align:left" th:if="${books.onRent} == 1">대출불가</td>
         <td style="width:150px" th:if="${member.id} == 'test1'"> <!-- 추후 관리자 id로 수정 예정 -->
-          <button type="submit"
+          <button type="button"
                   style="width:70px;height:30px;font-weight:bold"
-                  th:onclick="|location.href='@{/bookList/{bookId}/update}'|">
-            수정
-          </button>
-          <button type="submit"
-                  style="width:70px;height:30px;font-weight:bold">
-            삭제
-          </button>
+                  th:onclick="|location.href='@{/bookList/{bookId}/update(bookId = ${books.id})}'|">수정</button>
+          <button type="button" style="display:inline;width:70px;height:30px;font-weight:bold"
+                  th:onclick="deleteBook([[${books}]])">삭제</button>
         </td>
       </tr>
     </table>
