@@ -73,10 +73,6 @@
                 style="width:100px;height:45px;font-weight:bold;font-size:large;float:right">
             도서 검색
         </button>
-        <button th:if="${member.id} == 'test1'" type="submit"
-                style="width:100px;height:45px;font-weight:bold;font-size:large;float:right">
-            도서 추가
-        </button>
         <button th:if="${member.id} == 'test1'" type="button"
                 style="width:100px;height:45px;font-weight:bold;font-size:large;float:right"
                 th:onclick="|location.href='@{/bookList/add}'|">도서 추가</button>

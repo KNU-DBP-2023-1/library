@@ -97,7 +97,7 @@ public class BookService {
         bookEntity.setId(bookForm.getId());
 
         List<UserBook> list = new ArrayList<>();
-        for(UserBook bookEntity2 : memberMapper.findCondId(bookEntity)) {
+        for (UserBook bookEntity2 : memberMapper.findCondId(bookEntity)) {
             UserBook book2 = new UserBook();
             book2.setId(bookEntity2.getId());
             book2.setTitle(bookEntity2.getTitle());
@@ -107,6 +107,8 @@ public class BookService {
             list.add(book2);
         }
         return list;
+    }
+
     public void deleteBook(Long bookId) {
         BookEntity bookEntity = bookRepository.findById(bookId).orElseThrow(
                 IllegalArgumentException::new
