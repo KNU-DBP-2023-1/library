@@ -16,6 +16,6 @@
     </select>
 
     <update id="returnBook">
-        update book set on_rent=false where id=#{bookId}
+        update book set on_rent=false, userid=null where id=#{bookId}
     </update>
 </mapper>

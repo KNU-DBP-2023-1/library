@@ -1,6 +1,5 @@
 package com.knu.library.entity;
 
-import com.knu.library.domain.Member;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -24,4 +23,8 @@ public class BookEntity {
 
     @Column
     private Boolean onRent;
+
+    @ManyToOne
+    @JoinColumn(name = "userid")
+    private MemberEntity memberEntity;
 }
