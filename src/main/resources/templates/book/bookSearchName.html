@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <title>도서 이름 검색</title>
@@ -87,7 +87,7 @@
         <th scope="col">저자</th>
         <th scope="col">출판사</th>
         <th scope="col">대출여부</th>
-        <th th:if="${member.id} == 'test1'" scope="col">관리자 기능</th>
+        <th th:if="${member.id} == 'admin'" scope="col">관리자 기능</th>
       </tr>
       <tr th:each="books: ${books}">
         <td th:text="${books.id}"></td>
@@ -102,7 +102,7 @@
           </form>
         </td>
         <td style="text-align:left" th:if="${books.onRent} == 1">대출불가</td>
-        <td style="width:150px" th:if="${member.id} == 'test1'"> <!-- 추후 관리자 id로 수정 예정 -->
+        <td style="width:150px" th:if="${member.id} == 'admin'">
           <button type="button"
                   style="width:70px;height:30px;font-weight:bold"
                   th:onclick="|location.href='@{/bookList/{bookId}/update(bookId = ${books.id})}'|">수정</button>

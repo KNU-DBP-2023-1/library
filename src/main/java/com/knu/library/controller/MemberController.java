@@ -48,7 +48,6 @@ public class MemberController {
             return "member/login";
         }
 
-        //로그인 성공 처리 TODO
         //세션이 있으면 있는 세션 반환, 없으면 신규 세션 생성
         HttpSession session = request.getSession();
         //세션에 로그인 회원 정보 보관
