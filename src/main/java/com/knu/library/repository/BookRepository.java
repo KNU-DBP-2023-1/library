@@ -12,7 +12,5 @@ public interface BookRepository {
 
     Optional<BookEntity> findById(Long id);
 
-//    void rent(BookEntity bookEntity);
-
     void delete(BookEntity bookEntity);
 }
