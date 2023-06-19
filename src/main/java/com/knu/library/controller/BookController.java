@@ -74,10 +74,8 @@ public class BookController {
 
     @GetMapping("/rent")
     public String rentBook(@RequestParam Long bookId, HttpServletRequest request) {
-        // 수정할 예정
         Member loginMember = getLoginMember(request);
         if (loginMember == null) return "redirect:/";
-
         bookService.rentBook(bookId, loginMember);
         return "redirect:/bookList";
     }
@@ -139,14 +137,7 @@ public class BookController {
         model.addAttribute("books", books);
         return "book/bookSearchName";
     }
-//    @GetMapping(value = "/bookSearchId")
-//    public String searchFormId(Model model, HttpServletRequest request) {
-//        Member loginMember = getLoginMember(request);
-//        if (loginMember == null) return "redirect:/";
-//        model.addAttribute("member", loginMember);
-//
-//        return "book/bookSearchName";
-//    }
+
     @PostMapping(value = "/bookSearchId")
     public String searchId(Book.Simple form, Model model, Model model2,  HttpServletRequest request){
         Member loginMember = getLoginMember(request);
