@@ -20,6 +20,7 @@
 - id: test1 / pw: test! / name: testname1
 - id: test2 / pw: test! / name: testname2
 - id: test3 / pw: test! / name: testname3
+- id: admin / pw: admin! / name: 관리자
 
 ## Git 브랜치 전략(규칙)
 - **`main`브랜치는 팀원들이 작업한 브랜치를 병합하고 배포하는 용도로만 사용합니다.**

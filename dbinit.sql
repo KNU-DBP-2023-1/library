@@ -61,6 +61,7 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 insert into member values ('test1', 'test!', 'testname1');
 insert into member values ('test2', 'test!', 'testname2');
 insert into member values ('test3', 'test!', 'testname3');
+insert into member values ('admin', 'admin!', '관리자');
 
 insert into book values (1, '책제목1', '출판사1', '작가1', false, null);
 insert into book values (2, '책제목2', '출판사2', '작가2', false, null);
